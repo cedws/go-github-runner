@@ -553,4 +553,3 @@ components:
       required: true
       schema:
         type: string
-# (x-path-templates section left as original as it is not standard; you can clean up or remove as preferred.)

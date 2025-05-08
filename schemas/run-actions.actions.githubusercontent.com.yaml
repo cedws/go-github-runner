@@ -1,0 +1,337 @@
+openapi: 3.0.0
+info:
+  title: GitHub Actions Run API
+paths:
+  /{id}/acquirejob:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fileTable:
+                    type: array
+                    items:
+                      type: string
+                  mask:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                  steps:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        reference:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            name:
+                              type: string
+                            ref:
+                              type: string
+                            repositoryType:
+                              type: string
+                        id:
+                          type: string
+                        contextName:
+                          type: string
+                        name:
+                          type: string
+                        condition:
+                          type: string
+                        continueOnError:
+                          type: object
+                          nullable: true
+                        timeoutInMinutes:
+                          type: object
+                          nullable: true
+                  variables:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                        isSecret:
+                          type: boolean
+                  messageType:
+                    type: string
+                  plan:
+                    type: object
+                    properties:
+                      planType:
+                        type: string
+                      version:
+                        type: number
+                      planId:
+                        type: string
+                      artifactUri:
+                        type: string
+                      artifactLocation:
+                        type: string
+                  timeline:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      changeId:
+                        type: number
+                      location:
+                        type: object
+                        nullable: true
+                  jobId:
+                    type: string
+                  jobDisplayName:
+                    type: string
+                  jobName:
+                    type: string
+                  requestId:
+                    type: number
+                  lockedUntil:
+                    type: string
+                  environmentVariables:
+                    type: array
+                    items: {}
+                  defaults:
+                    type: array
+                    items: {}
+                  jobOutputs:
+                    type: object
+                    nullable: true
+                  jobContainer:
+                    type: object
+                    nullable: true
+                  jobServiceContainers:
+                    type: object
+                    nullable: true
+                  resources:
+                    type: object
+                    properties:
+                      endpoints:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            data:
+                              type: object
+                              properties:
+                                ServerId:
+                                  type: string
+                                ServerName:
+                                  type: string
+                                CacheServerUrl:
+                                  type: string
+                                FeedStreamUrl:
+                                  type: string
+                                ResultsServiceUrl:
+                                  type: string
+                                PipelinesServiceUrl:
+                                  type: string
+                                GenerateIdTokenUrl:
+                                  type: string
+                            name:
+                              type: string
+                            url:
+                              type: string
+                            authorization:
+                              type: object
+                              properties:
+                                parameters:
+                                  type: object
+                                  properties:
+                                    AccessToken:
+                                      type: string
+                                scheme:
+                                  type: string
+                            isShared:
+                              type: boolean
+                            isReady:
+                              type: boolean
+                  contextData:
+                    type: object
+                    properties:
+                      github:
+                        type: object
+                        properties:
+                          t:
+                            type: number
+                          d:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                k:
+                                  type: string
+                                v:
+                                  type: string
+                      inputs:
+                        type: object
+                        properties:
+                          t:
+                            type: number
+                          d:
+                            type: array
+                            items: {}
+                      matrix:
+                        type: object
+                        nullable: true
+                      needs:
+                        type: object
+                        properties:
+                          t:
+                            type: number
+                          d:
+                            type: array
+                            items: {}
+                      strategy:
+                        type: object
+                        properties:
+                          t:
+                            type: number
+                          d:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                k:
+                                  type: string
+                                v:
+                                  type: boolean
+                      vars:
+                        type: object
+                        properties:
+                          t:
+                            type: number
+                          d:
+                            type: array
+                            items: {}
+                  snapshot:
+                    type: object
+                    nullable: true
+                  billingOwnerId:
+                    type: string
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jobMessageId:
+                  type: string
+                runnerOS:
+                  type: string
+                billingOwnerId:
+                  type: string
+  /{id}/renewjob:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lockedUntil:
+                    type: string
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                planId:
+                  type: string
+                jobId:
+                  type: string
+  /{id}/completejob:
+    post:
+      responses:
+        "200":
+          description: OK
+          content: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                planId:
+                  type: string
+                jobId:
+                  type: string
+                conclusion:
+                  type: string
+                outputs:
+                  type: object
+                  properties: {}
+                stepResults:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      external_id:
+                        type: string
+                      number:
+                        type: number
+                      name:
+                        type: string
+                      action_name:
+                        type: string
+                      type:
+                        type: string
+                      status:
+                        type: string
+                      conclusion:
+                        type: string
+                      started_at:
+                        type: string
+                      completed_at:
+                        type: string
+                      annotations:
+                        type: array
+                        items: {}
+                annotations:
+                  type: array
+                  items: {}
+                telemetry:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      type:
+                        type: string
+                billingOwnerId:
+                  type: string
