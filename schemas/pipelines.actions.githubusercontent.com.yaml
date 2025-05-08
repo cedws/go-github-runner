@@ -1,21 +1,11 @@
 openapi: 3.0.0
 info:
-  title: pipelines.actions.githubusercontent.com
-  version: 1.0.0
-servers:
-  - url: https://pipelinesghubeus7.actions.githubusercontent.com
-    description: GitHub Pipelines API
+  title: GitHub Actions Pipelines API
 paths:
   /{tenantId}/_apis/connectionData:
     get:
-      summary: GET connection data
       parameters:
-        - name: tenantId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The tenant ID
+        - $ref: "#/components/parameters/tenantId"
         - name: connectOptions
           in: query
           required: false
@@ -98,16 +88,11 @@ paths:
                             properties:
                               type: object
                               properties: {}
+
   /{tenantId}/_apis/distributedtask/pools:
     get:
-      summary: GET pools
       parameters:
-        - name: tenantId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The tenant ID
+        - $ref: "#/components/parameters/tenantId"
         - name: poolType
           in: query
           required: false
@@ -172,22 +157,16 @@ paths:
                     type: number
                   eventId:
                     type: number
+
   /{tenantId}/_apis/distributedtask/pools/{id}/agents:
     get:
-      summary: GET agents by pool ID
       parameters:
-        - name: tenantId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The tenant ID
+        - $ref: "#/components/parameters/tenantId"
         - name: id
           in: path
           required: true
           schema:
             type: string
-          description: The pool ID
         - name: agentName
           in: query
           required: false
@@ -212,20 +191,13 @@ paths:
                     type: array
                     items: {}
     post:
-      summary: POST agents by pool ID
       parameters:
-        - name: tenantId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The tenant ID
+        - $ref: "#/components/parameters/tenantId"
         - name: id
           in: path
           required: true
           schema:
             type: string
-          description: The pool ID
       requestBody:
         content:
           application/json:
@@ -361,22 +333,16 @@ paths:
                     nullable: true
                   provisioningState:
                     type: string
+
   /{tenantId}/_apis/distributedtask/pools/{id}/sessions:
     post:
-      summary: POST sessions by pool ID
       parameters:
-        - name: tenantId
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The tenant ID
+        - $ref: "#/components/parameters/tenantId"
         - name: id
           in: path
           required: true
           schema:
             type: string
-          description: The pool ID
       requestBody:
         content:
           application/json:
@@ -459,3 +425,132 @@ paths:
                         nullable: true
                   useFipsEncryption:
                     type: boolean
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  $id:
+                    type: string
+                  innerException:
+                    type: object
+                    nullable: true
+                  message:
+                    type: string
+                  typeName:
+                    type: string
+                  typeKey:
+                    type: string
+                  errorCode:
+                    type: number
+                  eventId:
+                    type: number
+
+  /{tenantId}/_apis/distributedtask/pools/{id}/messages:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/tenantId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: runnerVersion
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: os
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: architecture
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: disableUpdate
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messageType:
+                    type: string
+                  body:
+                    type: string
+
+  /{tenantId}/_apis/distributedtask/pools/{id}/messages/{id1}:
+    delete:
+      parameters:
+        - $ref: "#/components/parameters/tenantId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id1
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content: {}
+
+  # This path seems specific. Consider if you want a generalized pattern.
+  /{tenantId}/_apis/distributedtask/pools/{id}/sessions/{sessionId}:
+    delete:
+      parameters:
+        - $ref: "#/components/parameters/tenantId"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content: {}
+
+components:
+  parameters:
+    tenantId:
+      name: tenantId
+      in: path
+      description: Tenant identifier
+      required: true
+      schema:
+        type: string
+# (x-path-templates section left as original as it is not standard; you can clean up or remove as preferred.)

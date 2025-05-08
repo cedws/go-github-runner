@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: GitHub Actions Results Receiver API
+servers:
+  - url: https://results-receiver.actions.githubusercontent.com
+paths:
+  /twirp/github.actions.results.api.v1.WorkflowStepUpdateService/WorkflowStepsUpdate:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                steps:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      external_id:
+                        type: string
+                      number:
+                        type: number
+                      name:
+                        type: string
+                      status:
+                        type: number
+                      started_at:
+                        type: string
+                      completed_at:
+                        type: object
+                        nullable: true
+                      conclusion:
+                        type: number
+                change_order:
+                  type: number
+                workflow_job_run_backend_id:
+                  type: string
+                workflow_run_backend_id:
+                  type: string
+  /twirp/results.services.receiver.Receiver/GetStepLogsSignedBlobURL:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs_url:
+                    type: string
+                  soft_size_limit:
+                    type: string
+                  blob_storage_type:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow_job_run_backend_id:
+                  type: string
+                workflow_run_backend_id:
+                  type: string
+                step_backend_id:
+                  type: string
+  /twirp/results.services.receiver.Receiver/CreateStepLogsMetadata:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow_run_backend_id:
+                  type: string
+                workflow_job_run_backend_id:
+                  type: string
+                step_backend_id:
+                  type: string
+                uploaded_at:
+                  type: string
+                line_count:
+                  type: number
+  /twirp/results.services.receiver.Receiver/GetJobLogsSignedBlobURL:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs_url:
+                    type: string
+                  blob_storage_type:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow_job_run_backend_id:
+                  type: string
+                workflow_run_backend_id:
+                  type: string
+  /twirp/results.services.receiver.Receiver/CreateJobLogsMetadata:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow_run_backend_id:
+                  type: string
+                workflow_job_run_backend_id:
+                  type: string
+                uploaded_at:
+                  type: string
+                line_count:
+                  type: number
+  /_ws/ingest.sock:
+    get:
+      responses:
+        "200":
+          description: OK
+          content: {}

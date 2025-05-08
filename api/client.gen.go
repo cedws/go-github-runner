@@ -12,20 +12,12 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/oapi-codegen/runtime"
 )
 
 // PostRunnerRegistrationJSONBody defines parameters for PostRunnerRegistration.
 type PostRunnerRegistrationJSONBody struct {
 	RunnerEvent *string `json:"runner_event,omitempty"`
 	Url         *string `json:"url,omitempty"`
-}
-
-// PostRunnerRegistrationParams defines parameters for PostRunnerRegistration.
-type PostRunnerRegistrationParams struct {
-	// Authorization Authorization header in the format `RemoteAuth ${TOKEN}`.
-	Authorization string `json:"Authorization"`
 }
 
 // PostRunnerRegistrationJSONRequestBody defines body for PostRunnerRegistration for application/json ContentType.
@@ -105,13 +97,13 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 // The interface specification for the client above.
 type ClientInterface interface {
 	// PostRunnerRegistrationWithBody request with any body
-	PostRunnerRegistrationWithBody(ctx context.Context, params *PostRunnerRegistrationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostRunnerRegistrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostRunnerRegistration(ctx context.Context, params *PostRunnerRegistrationParams, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostRunnerRegistration(ctx context.Context, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) PostRunnerRegistrationWithBody(ctx context.Context, params *PostRunnerRegistrationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostRunnerRegistrationRequestWithBody(c.Server, params, contentType, body)
+func (c *Client) PostRunnerRegistrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostRunnerRegistrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -122,8 +114,8 @@ func (c *Client) PostRunnerRegistrationWithBody(ctx context.Context, params *Pos
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostRunnerRegistration(ctx context.Context, params *PostRunnerRegistrationParams, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostRunnerRegistrationRequest(c.Server, params, body)
+func (c *Client) PostRunnerRegistration(ctx context.Context, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostRunnerRegistrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -135,18 +127,18 @@ func (c *Client) PostRunnerRegistration(ctx context.Context, params *PostRunnerR
 }
 
 // NewPostRunnerRegistrationRequest calls the generic PostRunnerRegistration builder with application/json body
-func NewPostRunnerRegistrationRequest(server string, params *PostRunnerRegistrationParams, body PostRunnerRegistrationJSONRequestBody) (*http.Request, error) {
+func NewPostRunnerRegistrationRequest(server string, body PostRunnerRegistrationJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostRunnerRegistrationRequestWithBody(server, params, "application/json", bodyReader)
+	return NewPostRunnerRegistrationRequestWithBody(server, "application/json", bodyReader)
 }
 
 // NewPostRunnerRegistrationRequestWithBody generates requests for PostRunnerRegistration with any type of body
-func NewPostRunnerRegistrationRequestWithBody(server string, params *PostRunnerRegistrationParams, contentType string, body io.Reader) (*http.Request, error) {
+func NewPostRunnerRegistrationRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -170,19 +162,6 @@ func NewPostRunnerRegistrationRequestWithBody(server string, params *PostRunnerR
 	}
 
 	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		var headerParam0 string
-
-		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "Authorization", runtime.ParamLocationHeader, params.Authorization)
-		if err != nil {
-			return nil, err
-		}
-
-		req.Header.Set("Authorization", headerParam0)
-
-	}
 
 	return req, nil
 }
@@ -231,9 +210,9 @@ func WithBaseURL(baseURL string) ClientOption {
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
 	// PostRunnerRegistrationWithBodyWithResponse request with any body
-	PostRunnerRegistrationWithBodyWithResponse(ctx context.Context, params *PostRunnerRegistrationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error)
+	PostRunnerRegistrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error)
 
-	PostRunnerRegistrationWithResponse(ctx context.Context, params *PostRunnerRegistrationParams, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error)
+	PostRunnerRegistrationWithResponse(ctx context.Context, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error)
 }
 
 type PostRunnerRegistrationResponse struct {
@@ -263,16 +242,16 @@ func (r PostRunnerRegistrationResponse) StatusCode() int {
 }
 
 // PostRunnerRegistrationWithBodyWithResponse request with arbitrary body returning *PostRunnerRegistrationResponse
-func (c *ClientWithResponses) PostRunnerRegistrationWithBodyWithResponse(ctx context.Context, params *PostRunnerRegistrationParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error) {
-	rsp, err := c.PostRunnerRegistrationWithBody(ctx, params, contentType, body, reqEditors...)
+func (c *ClientWithResponses) PostRunnerRegistrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error) {
+	rsp, err := c.PostRunnerRegistrationWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePostRunnerRegistrationResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostRunnerRegistrationWithResponse(ctx context.Context, params *PostRunnerRegistrationParams, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error) {
-	rsp, err := c.PostRunnerRegistration(ctx, params, body, reqEditors...)
+func (c *ClientWithResponses) PostRunnerRegistrationWithResponse(ctx context.Context, body PostRunnerRegistrationJSONRequestBody, reqEditors ...RequestEditorFn) (*PostRunnerRegistrationResponse, error) {
+	rsp, err := c.PostRunnerRegistration(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

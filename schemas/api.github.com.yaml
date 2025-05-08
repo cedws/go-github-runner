@@ -1,21 +1,11 @@
 openapi: 3.0.0
 info:
-  title: api.github.com
-  version: 1.0.0
+  title: GitHub Actions API
 servers:
   - url: https://api.github.com/actions
-    description: GitHub Actions API
 paths:
   /runner-registration:
     post:
-      summary: Register a new self-hosted runner
-      parameters:
-        - in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-          description: Authorization header in the format `RemoteAuth ${TOKEN}`.
       responses:
         "200":
           description: OK

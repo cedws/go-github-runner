@@ -16,6 +16,9 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
+// TenantId defines model for tenantId.
+type TenantId = string
+
 // GetTenantIdApisConnectionDataParams defines parameters for GetTenantIdApisConnectionData.
 type GetTenantIdApisConnectionDataParams struct {
 	ConnectOptions *float32 `form:"connectOptions,omitempty" json:"connectOptions,omitempty"`
@@ -57,6 +60,21 @@ type PostTenantIdApisDistributedtaskPoolsIdAgentsJSONBody struct {
 	ProvisioningState *string  `json:"provisioningState,omitempty"`
 	Status            *float32 `json:"status,omitempty"`
 	Version           *string  `json:"version,omitempty"`
+}
+
+// GetTenantIdApisDistributedtaskPoolsIdMessagesParams defines parameters for GetTenantIdApisDistributedtaskPoolsIdMessages.
+type GetTenantIdApisDistributedtaskPoolsIdMessagesParams struct {
+	SessionId     *string `form:"sessionId,omitempty" json:"sessionId,omitempty"`
+	Status        *string `form:"status,omitempty" json:"status,omitempty"`
+	RunnerVersion *string `form:"runnerVersion,omitempty" json:"runnerVersion,omitempty"`
+	Os            *string `form:"os,omitempty" json:"os,omitempty"`
+	Architecture  *string `form:"architecture,omitempty" json:"architecture,omitempty"`
+	DisableUpdate *string `form:"disableUpdate,omitempty" json:"disableUpdate,omitempty"`
+}
+
+// DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params defines parameters for DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1.
+type DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params struct {
+	SessionId *string `form:"sessionId,omitempty" json:"sessionId,omitempty"`
 }
 
 // PostTenantIdApisDistributedtaskPoolsIdSessionsJSONBody defines parameters for PostTenantIdApisDistributedtaskPoolsIdSessions.
@@ -155,26 +173,35 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 // The interface specification for the client above.
 type ClientInterface interface {
 	// GetTenantIdApisConnectionData request
-	GetTenantIdApisConnectionData(ctx context.Context, tenantId string, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetTenantIdApisConnectionData(ctx context.Context, tenantId TenantId, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTenantIdApisDistributedtaskPools request
-	GetTenantIdApisDistributedtaskPools(ctx context.Context, tenantId string, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetTenantIdApisDistributedtaskPools(ctx context.Context, tenantId TenantId, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTenantIdApisDistributedtaskPoolsIdAgents request
-	GetTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId string, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody request with any body
-	PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetTenantIdApisDistributedtaskPoolsIdMessages request
+	GetTenantIdApisDistributedtaskPoolsIdMessages(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdMessagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1 request
+	DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1(ctx context.Context, tenantId TenantId, id string, id1 string, params *DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody request with any body
-	PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostTenantIdApisDistributedtaskPoolsIdSessions(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostTenantIdApisDistributedtaskPoolsIdSessions(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionId request
+	DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionId(ctx context.Context, tenantId TenantId, id string, sessionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) GetTenantIdApisConnectionData(ctx context.Context, tenantId string, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetTenantIdApisConnectionData(ctx context.Context, tenantId TenantId, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTenantIdApisConnectionDataRequest(c.Server, tenantId, params)
 	if err != nil {
 		return nil, err
@@ -186,7 +213,7 @@ func (c *Client) GetTenantIdApisConnectionData(ctx context.Context, tenantId str
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetTenantIdApisDistributedtaskPools(ctx context.Context, tenantId string, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetTenantIdApisDistributedtaskPools(ctx context.Context, tenantId TenantId, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTenantIdApisDistributedtaskPoolsRequest(c.Server, tenantId, params)
 	if err != nil {
 		return nil, err
@@ -198,7 +225,7 @@ func (c *Client) GetTenantIdApisDistributedtaskPools(ctx context.Context, tenant
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId string, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTenantIdApisDistributedtaskPoolsIdAgentsRequest(c.Server, tenantId, id, params)
 	if err != nil {
 		return nil, err
@@ -210,7 +237,7 @@ func (c *Client) GetTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequestWithBody(c.Server, tenantId, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -222,7 +249,7 @@ func (c *Client) PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody(ctx contex
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) PostTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequest(c.Server, tenantId, id, body)
 	if err != nil {
 		return nil, err
@@ -234,7 +261,31 @@ func (c *Client) PostTenantIdApisDistributedtaskPoolsIdAgents(ctx context.Contex
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) GetTenantIdApisDistributedtaskPoolsIdMessages(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdMessagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetTenantIdApisDistributedtaskPoolsIdMessagesRequest(c.Server, tenantId, id, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1(ctx context.Context, tenantId TenantId, id string, id1 string, params *DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Request(c.Server, tenantId, id, id1, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequestWithBody(c.Server, tenantId, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -246,7 +297,7 @@ func (c *Client) PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody(ctx cont
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostTenantIdApisDistributedtaskPoolsIdSessions(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) PostTenantIdApisDistributedtaskPoolsIdSessions(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequest(c.Server, tenantId, id, body)
 	if err != nil {
 		return nil, err
@@ -258,8 +309,20 @@ func (c *Client) PostTenantIdApisDistributedtaskPoolsIdSessions(ctx context.Cont
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionId(ctx context.Context, tenantId TenantId, id string, sessionId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdRequest(c.Server, tenantId, id, sessionId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // NewGetTenantIdApisConnectionDataRequest generates requests for GetTenantIdApisConnectionData
-func NewGetTenantIdApisConnectionDataRequest(server string, tenantId string, params *GetTenantIdApisConnectionDataParams) (*http.Request, error) {
+func NewGetTenantIdApisConnectionDataRequest(server string, tenantId TenantId, params *GetTenantIdApisConnectionDataParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -347,7 +410,7 @@ func NewGetTenantIdApisConnectionDataRequest(server string, tenantId string, par
 }
 
 // NewGetTenantIdApisDistributedtaskPoolsRequest generates requests for GetTenantIdApisDistributedtaskPools
-func NewGetTenantIdApisDistributedtaskPoolsRequest(server string, tenantId string, params *GetTenantIdApisDistributedtaskPoolsParams) (*http.Request, error) {
+func NewGetTenantIdApisDistributedtaskPoolsRequest(server string, tenantId TenantId, params *GetTenantIdApisDistributedtaskPoolsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -403,7 +466,7 @@ func NewGetTenantIdApisDistributedtaskPoolsRequest(server string, tenantId strin
 }
 
 // NewGetTenantIdApisDistributedtaskPoolsIdAgentsRequest generates requests for GetTenantIdApisDistributedtaskPoolsIdAgents
-func NewGetTenantIdApisDistributedtaskPoolsIdAgentsRequest(server string, tenantId string, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams) (*http.Request, error) {
+func NewGetTenantIdApisDistributedtaskPoolsIdAgentsRequest(server string, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -482,7 +545,7 @@ func NewGetTenantIdApisDistributedtaskPoolsIdAgentsRequest(server string, tenant
 }
 
 // NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequest calls the generic PostTenantIdApisDistributedtaskPoolsIdAgents builder with application/json body
-func NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequest(server string, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody) (*http.Request, error) {
+func NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequest(server string, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
@@ -493,7 +556,7 @@ func NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequest(server string, tenan
 }
 
 // NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequestWithBody generates requests for PostTenantIdApisDistributedtaskPoolsIdAgents with any type of body
-func NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequestWithBody(server string, tenantId string, id string, contentType string, body io.Reader) (*http.Request, error) {
+func NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequestWithBody(server string, tenantId TenantId, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -535,8 +598,221 @@ func NewPostTenantIdApisDistributedtaskPoolsIdAgentsRequestWithBody(server strin
 	return req, nil
 }
 
+// NewGetTenantIdApisDistributedtaskPoolsIdMessagesRequest generates requests for GetTenantIdApisDistributedtaskPoolsIdMessages
+func NewGetTenantIdApisDistributedtaskPoolsIdMessagesRequest(server string, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdMessagesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "tenantId", runtime.ParamLocationPath, tenantId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/%s/_apis/distributedtask/pools/%s/messages", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.SessionId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sessionId", runtime.ParamLocationQuery, *params.SessionId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Status != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "status", runtime.ParamLocationQuery, *params.Status); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RunnerVersion != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "runnerVersion", runtime.ParamLocationQuery, *params.RunnerVersion); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Os != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "os", runtime.ParamLocationQuery, *params.Os); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Architecture != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "architecture", runtime.ParamLocationQuery, *params.Architecture); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DisableUpdate != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "disableUpdate", runtime.ParamLocationQuery, *params.DisableUpdate); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Request generates requests for DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1
+func NewDeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Request(server string, tenantId TenantId, id string, id1 string, params *DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "tenantId", runtime.ParamLocationPath, tenantId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithLocation("simple", false, "id1", runtime.ParamLocationPath, id1)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/%s/_apis/distributedtask/pools/%s/messages/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.SessionId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sessionId", runtime.ParamLocationQuery, *params.SessionId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequest calls the generic PostTenantIdApisDistributedtaskPoolsIdSessions builder with application/json body
-func NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequest(server string, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody) (*http.Request, error) {
+func NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequest(server string, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
@@ -547,7 +823,7 @@ func NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequest(server string, ten
 }
 
 // NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequestWithBody generates requests for PostTenantIdApisDistributedtaskPoolsIdSessions with any type of body
-func NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequestWithBody(server string, tenantId string, id string, contentType string, body io.Reader) (*http.Request, error) {
+func NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequestWithBody(server string, tenantId TenantId, id string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -585,6 +861,54 @@ func NewPostTenantIdApisDistributedtaskPoolsIdSessionsRequestWithBody(server str
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdRequest generates requests for DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionId
+func NewDeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdRequest(server string, tenantId TenantId, id string, sessionId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "tenantId", runtime.ParamLocationPath, tenantId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithLocation("simple", false, "sessionId", runtime.ParamLocationPath, sessionId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/%s/_apis/distributedtask/pools/%s/sessions/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -633,23 +957,32 @@ func WithBaseURL(baseURL string) ClientOption {
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
 	// GetTenantIdApisConnectionDataWithResponse request
-	GetTenantIdApisConnectionDataWithResponse(ctx context.Context, tenantId string, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisConnectionDataResponse, error)
+	GetTenantIdApisConnectionDataWithResponse(ctx context.Context, tenantId TenantId, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisConnectionDataResponse, error)
 
 	// GetTenantIdApisDistributedtaskPoolsWithResponse request
-	GetTenantIdApisDistributedtaskPoolsWithResponse(ctx context.Context, tenantId string, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsResponse, error)
+	GetTenantIdApisDistributedtaskPoolsWithResponse(ctx context.Context, tenantId TenantId, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsResponse, error)
 
 	// GetTenantIdApisDistributedtaskPoolsIdAgentsWithResponse request
-	GetTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId string, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsIdAgentsResponse, error)
+	GetTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsIdAgentsResponse, error)
 
 	// PostTenantIdApisDistributedtaskPoolsIdAgentsWithBodyWithResponse request with any body
-	PostTenantIdApisDistributedtaskPoolsIdAgentsWithBodyWithResponse(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error)
+	PostTenantIdApisDistributedtaskPoolsIdAgentsWithBodyWithResponse(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error)
 
-	PostTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error)
+	PostTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error)
+
+	// GetTenantIdApisDistributedtaskPoolsIdMessagesWithResponse request
+	GetTenantIdApisDistributedtaskPoolsIdMessagesWithResponse(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdMessagesParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsIdMessagesResponse, error)
+
+	// DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1WithResponse request
+	DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1WithResponse(ctx context.Context, tenantId TenantId, id string, id1 string, params *DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params, reqEditors ...RequestEditorFn) (*DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response, error)
 
 	// PostTenantIdApisDistributedtaskPoolsIdSessionsWithBodyWithResponse request with any body
-	PostTenantIdApisDistributedtaskPoolsIdSessionsWithBodyWithResponse(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error)
+	PostTenantIdApisDistributedtaskPoolsIdSessionsWithBodyWithResponse(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error)
 
-	PostTenantIdApisDistributedtaskPoolsIdSessionsWithResponse(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error)
+	PostTenantIdApisDistributedtaskPoolsIdSessionsWithResponse(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error)
+
+	// DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdWithResponse request
+	DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdWithResponse(ctx context.Context, tenantId TenantId, id string, sessionId string, reqEditors ...RequestEditorFn) (*DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse, error)
 }
 
 type GetTenantIdApisConnectionDataResponse struct {
@@ -837,6 +1170,52 @@ func (r PostTenantIdApisDistributedtaskPoolsIdAgentsResponse) StatusCode() int {
 	return 0
 }
 
+type GetTenantIdApisDistributedtaskPoolsIdMessagesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Body        *string `json:"body,omitempty"`
+		MessageType *string `json:"messageType,omitempty"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r GetTenantIdApisDistributedtaskPoolsIdMessagesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetTenantIdApisDistributedtaskPoolsIdMessagesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type PostTenantIdApisDistributedtaskPoolsIdSessionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -862,6 +1241,15 @@ type PostTenantIdApisDistributedtaskPoolsIdSessionsResponse struct {
 		SessionId         *string `json:"sessionId,omitempty"`
 		UseFipsEncryption *bool   `json:"useFipsEncryption,omitempty"`
 	}
+	JSON401 *struct {
+		Id             *string                 `json:"$id,omitempty"`
+		ErrorCode      *float32                `json:"errorCode,omitempty"`
+		EventId        *float32                `json:"eventId,omitempty"`
+		InnerException *map[string]interface{} `json:"innerException"`
+		Message        *string                 `json:"message,omitempty"`
+		TypeKey        *string                 `json:"typeKey,omitempty"`
+		TypeName       *string                 `json:"typeName,omitempty"`
+	}
 }
 
 // Status returns HTTPResponse.Status
@@ -880,8 +1268,29 @@ func (r PostTenantIdApisDistributedtaskPoolsIdSessionsResponse) StatusCode() int
 	return 0
 }
 
+type DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 // GetTenantIdApisConnectionDataWithResponse request returning *GetTenantIdApisConnectionDataResponse
-func (c *ClientWithResponses) GetTenantIdApisConnectionDataWithResponse(ctx context.Context, tenantId string, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisConnectionDataResponse, error) {
+func (c *ClientWithResponses) GetTenantIdApisConnectionDataWithResponse(ctx context.Context, tenantId TenantId, params *GetTenantIdApisConnectionDataParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisConnectionDataResponse, error) {
 	rsp, err := c.GetTenantIdApisConnectionData(ctx, tenantId, params, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -890,7 +1299,7 @@ func (c *ClientWithResponses) GetTenantIdApisConnectionDataWithResponse(ctx cont
 }
 
 // GetTenantIdApisDistributedtaskPoolsWithResponse request returning *GetTenantIdApisDistributedtaskPoolsResponse
-func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsWithResponse(ctx context.Context, tenantId string, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsResponse, error) {
+func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsWithResponse(ctx context.Context, tenantId TenantId, params *GetTenantIdApisDistributedtaskPoolsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsResponse, error) {
 	rsp, err := c.GetTenantIdApisDistributedtaskPools(ctx, tenantId, params, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -899,7 +1308,7 @@ func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsWithResponse(ct
 }
 
 // GetTenantIdApisDistributedtaskPoolsIdAgentsWithResponse request returning *GetTenantIdApisDistributedtaskPoolsIdAgentsResponse
-func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId string, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsIdAgentsResponse, error) {
+func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdAgentsParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsIdAgentsResponse, error) {
 	rsp, err := c.GetTenantIdApisDistributedtaskPoolsIdAgents(ctx, tenantId, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -908,7 +1317,7 @@ func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsIdAgentsWithRes
 }
 
 // PostTenantIdApisDistributedtaskPoolsIdAgentsWithBodyWithResponse request with arbitrary body returning *PostTenantIdApisDistributedtaskPoolsIdAgentsResponse
-func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdAgentsWithBodyWithResponse(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error) {
+func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdAgentsWithBodyWithResponse(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error) {
 	rsp, err := c.PostTenantIdApisDistributedtaskPoolsIdAgentsWithBody(ctx, tenantId, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -916,7 +1325,7 @@ func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdAgentsWithBo
 	return ParsePostTenantIdApisDistributedtaskPoolsIdAgentsResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error) {
+func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdAgentsWithResponse(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdAgentsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdAgentsResponse, error) {
 	rsp, err := c.PostTenantIdApisDistributedtaskPoolsIdAgents(ctx, tenantId, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -924,8 +1333,26 @@ func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdAgentsWithRe
 	return ParsePostTenantIdApisDistributedtaskPoolsIdAgentsResponse(rsp)
 }
 
+// GetTenantIdApisDistributedtaskPoolsIdMessagesWithResponse request returning *GetTenantIdApisDistributedtaskPoolsIdMessagesResponse
+func (c *ClientWithResponses) GetTenantIdApisDistributedtaskPoolsIdMessagesWithResponse(ctx context.Context, tenantId TenantId, id string, params *GetTenantIdApisDistributedtaskPoolsIdMessagesParams, reqEditors ...RequestEditorFn) (*GetTenantIdApisDistributedtaskPoolsIdMessagesResponse, error) {
+	rsp, err := c.GetTenantIdApisDistributedtaskPoolsIdMessages(ctx, tenantId, id, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetTenantIdApisDistributedtaskPoolsIdMessagesResponse(rsp)
+}
+
+// DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1WithResponse request returning *DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response
+func (c *ClientWithResponses) DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1WithResponse(ctx context.Context, tenantId TenantId, id string, id1 string, params *DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Params, reqEditors ...RequestEditorFn) (*DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response, error) {
+	rsp, err := c.DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1(ctx, tenantId, id, id1, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response(rsp)
+}
+
 // PostTenantIdApisDistributedtaskPoolsIdSessionsWithBodyWithResponse request with arbitrary body returning *PostTenantIdApisDistributedtaskPoolsIdSessionsResponse
-func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdSessionsWithBodyWithResponse(ctx context.Context, tenantId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error) {
+func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdSessionsWithBodyWithResponse(ctx context.Context, tenantId TenantId, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error) {
 	rsp, err := c.PostTenantIdApisDistributedtaskPoolsIdSessionsWithBody(ctx, tenantId, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
@@ -933,12 +1360,21 @@ func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdSessionsWith
 	return ParsePostTenantIdApisDistributedtaskPoolsIdSessionsResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdSessionsWithResponse(ctx context.Context, tenantId string, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error) {
+func (c *ClientWithResponses) PostTenantIdApisDistributedtaskPoolsIdSessionsWithResponse(ctx context.Context, tenantId TenantId, id string, body PostTenantIdApisDistributedtaskPoolsIdSessionsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error) {
 	rsp, err := c.PostTenantIdApisDistributedtaskPoolsIdSessions(ctx, tenantId, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePostTenantIdApisDistributedtaskPoolsIdSessionsResponse(rsp)
+}
+
+// DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdWithResponse request returning *DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse
+func (c *ClientWithResponses) DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdWithResponse(ctx context.Context, tenantId TenantId, id string, sessionId string, reqEditors ...RequestEditorFn) (*DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse, error) {
+	rsp, err := c.DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionId(ctx, tenantId, id, sessionId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse(rsp)
 }
 
 // ParseGetTenantIdApisConnectionDataResponse parses an HTTP response from a GetTenantIdApisConnectionDataWithResponse call
@@ -1148,6 +1584,51 @@ func ParsePostTenantIdApisDistributedtaskPoolsIdAgentsResponse(rsp *http.Respons
 	return response, nil
 }
 
+// ParseGetTenantIdApisDistributedtaskPoolsIdMessagesResponse parses an HTTP response from a GetTenantIdApisDistributedtaskPoolsIdMessagesWithResponse call
+func ParseGetTenantIdApisDistributedtaskPoolsIdMessagesResponse(rsp *http.Response) (*GetTenantIdApisDistributedtaskPoolsIdMessagesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetTenantIdApisDistributedtaskPoolsIdMessagesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Body        *string `json:"body,omitempty"`
+			MessageType *string `json:"messageType,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response parses an HTTP response from a DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1WithResponse call
+func ParseDeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response(rsp *http.Response) (*DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteTenantIdApisDistributedtaskPoolsIdMessagesId1Response{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
+
 // ParsePostTenantIdApisDistributedtaskPoolsIdSessionsResponse parses an HTTP response from a PostTenantIdApisDistributedtaskPoolsIdSessionsWithResponse call
 func ParsePostTenantIdApisDistributedtaskPoolsIdSessionsResponse(rsp *http.Response) (*PostTenantIdApisDistributedtaskPoolsIdSessionsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -1190,6 +1671,37 @@ func ParsePostTenantIdApisDistributedtaskPoolsIdSessionsResponse(rsp *http.Respo
 		}
 		response.JSON200 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest struct {
+			Id             *string                 `json:"$id,omitempty"`
+			ErrorCode      *float32                `json:"errorCode,omitempty"`
+			EventId        *float32                `json:"eventId,omitempty"`
+			InnerException *map[string]interface{} `json:"innerException"`
+			Message        *string                 `json:"message,omitempty"`
+			TypeKey        *string                 `json:"typeKey,omitempty"`
+			TypeName       *string                 `json:"typeName,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse parses an HTTP response from a DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdWithResponse call
+func ParseDeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse(rsp *http.Response) (*DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteTenantIdApisDistributedtaskPoolsIdSessionsSessionIdResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
 	}
 
 	return response, nil
