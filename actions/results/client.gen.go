@@ -47,6 +47,21 @@ type PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONBody stru
 	WorkflowRunBackendId    *string  `json:"workflow_run_backend_id,omitempty"`
 }
 
+// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONBody defines parameters for PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata.
+type PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONBody struct {
+	Size                    *string `json:"size,omitempty"`
+	StepBackendId           *string `json:"step_backend_id,omitempty"`
+	UploadedAt              *string `json:"uploaded_at,omitempty"`
+	WorkflowJobRunBackendId *string `json:"workflow_job_run_backend_id,omitempty"`
+	WorkflowRunBackendId    *string `json:"workflow_run_backend_id,omitempty"`
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONBody defines parameters for PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL.
+type PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONBody struct {
+	WorkflowJobRunBackendId *string `json:"workflow_job_run_backend_id,omitempty"`
+	WorkflowRunBackendId    *string `json:"workflow_run_backend_id,omitempty"`
+}
+
 // PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONBody defines parameters for PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL.
 type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONBody struct {
 	WorkflowJobRunBackendId *string `json:"workflow_job_run_backend_id,omitempty"`
@@ -55,6 +70,13 @@ type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONBody str
 
 // PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONBody defines parameters for PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL.
 type PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONBody struct {
+	StepBackendId           *string `json:"step_backend_id,omitempty"`
+	WorkflowJobRunBackendId *string `json:"workflow_job_run_backend_id,omitempty"`
+	WorkflowRunBackendId    *string `json:"workflow_run_backend_id,omitempty"`
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONBody defines parameters for PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL.
+type PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONBody struct {
 	StepBackendId           *string `json:"step_backend_id,omitempty"`
 	WorkflowJobRunBackendId *string `json:"workflow_job_run_backend_id,omitempty"`
 	WorkflowRunBackendId    *string `json:"workflow_run_backend_id,omitempty"`
@@ -69,11 +91,20 @@ type PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataJSONRequestBod
 // PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONRequestBody defines body for PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata for application/json ContentType.
 type PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONRequestBody PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONBody
 
+// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody defines body for PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata for application/json ContentType.
+type PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONBody
+
+// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody defines body for PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL for application/json ContentType.
+type PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONBody
+
 // PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONRequestBody defines body for PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL for application/json ContentType.
 type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONRequestBody PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONBody
 
 // PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody defines body for PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL for application/json ContentType.
 type PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONBody
+
+// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody defines body for PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL for application/json ContentType.
+type PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONBody
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
@@ -166,6 +197,16 @@ type ClientInterface interface {
 
 	PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBody request with any body
+	PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBody request with any body
+	PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBody request with any body
 	PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -175,6 +216,11 @@ type ClientInterface interface {
 	PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBody request with any body
+	PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *Client) GetWsIngestSock(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -261,6 +307,54 @@ func (c *Client) PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(
 	return c.Client.Do(req)
 }
 
+func (c *Client) PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -299,6 +393,30 @@ func (c *Client) PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobUR
 
 func (c *Client) PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -456,6 +574,86 @@ func NewPostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataRequestWit
 	return req, nil
 }
 
+// NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequest calls the generic PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata builder with application/json body
+func NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequest(server string, body PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestWithBody generates requests for PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata with any type of body
+func NewPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/twirp/results.services.receiver.Receiver/CreateStepSummaryMetadata")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequest calls the generic PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL builder with application/json body
+func NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequest(server string, body PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestWithBody generates requests for PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL with any type of body
+func NewPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/twirp/results.services.receiver.Receiver/GetJobDiagLogsSignedBlobURL")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewPostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequest calls the generic PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL builder with application/json body
 func NewPostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequest(server string, body PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -536,6 +734,46 @@ func NewPostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRequestW
 	return req, nil
 }
 
+// NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequest calls the generic PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL builder with application/json body
+func NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequest(server string, body PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestWithBody generates requests for PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL with any type of body
+func NewPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/twirp/results.services.receiver.Receiver/GetStepSummarySignedBlobURL")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
 		if err := r(ctx, req); err != nil {
@@ -597,6 +835,16 @@ type ClientWithResponsesInterface interface {
 
 	PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse, error)
 
+	// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBodyWithResponse request with any body
+	PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse, error)
+
+	PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse, error)
+
+	// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBodyWithResponse request with any body
+	PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse, error)
+
+	PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse, error)
+
 	// PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBodyWithResponse request with any body
 	PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse, error)
 
@@ -606,6 +854,11 @@ type ClientWithResponsesInterface interface {
 	PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse, error)
 
 	PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse, error)
+
+	// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBodyWithResponse request with any body
+	PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse, error)
+
+	PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse, error)
 }
 
 type GetWsIngestSockResponse struct {
@@ -701,6 +954,55 @@ func (r PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse) 
 	return 0
 }
 
+type PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Ok *bool `json:"ok,omitempty"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		BlobStorageType *string `json:"blob_storage_type,omitempty"`
+		DiagLogsUrl     *string `json:"diag_logs_url,omitempty"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -746,6 +1048,32 @@ func (r PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		BlobStorageType *string `json:"blob_storage_type,omitempty"`
+		SoftSizeLimit   *string `json:"soft_size_limit,omitempty"`
+		SummaryUrl      *string `json:"summary_url,omitempty"`
+	}
+}
+
+// Status returns HTTPResponse.Status
+func (r PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -812,6 +1140,40 @@ func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverCreateStep
 	return ParsePostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse(rsp)
 }
 
+// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBodyWithResponse request with arbitrary body returning *PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse
+func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse, error) {
+	rsp, err := c.PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse(rsp)
+}
+
+func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse, error) {
+	rsp, err := c.PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse(rsp)
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBodyWithResponse request with arbitrary body returning *PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse
+func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse, error) {
+	rsp, err := c.PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse(rsp)
+}
+
+func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse, error) {
+	rsp, err := c.PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse(rsp)
+}
+
 // PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBodyWithResponse request with arbitrary body returning *PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse
 func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse, error) {
 	rsp, err := c.PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithBody(ctx, contentType, body, reqEditors...)
@@ -844,6 +1206,23 @@ func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverGetStepLog
 		return nil, err
 	}
 	return ParsePostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse(rsp)
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBodyWithResponse request with arbitrary body returning *PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse
+func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse, error) {
+	rsp, err := c.PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse(rsp)
+}
+
+func (c *ClientWithResponses) PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithResponse(ctx context.Context, body PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody, reqEditors ...RequestEditorFn) (*PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse, error) {
+	rsp, err := c.PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse(rsp)
 }
 
 // ParseGetWsIngestSockResponse parses an HTTP response from a GetWsIngestSockWithResponse call
@@ -946,6 +1325,63 @@ func ParsePostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse
 	return response, nil
 }
 
+// ParsePostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse parses an HTTP response from a PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataWithResponse call
+func ParsePostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse(rsp *http.Response) (*PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Ok *bool `json:"ok,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse parses an HTTP response from a PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLWithResponse call
+func ParsePostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse(rsp *http.Response) (*PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			BlobStorageType *string `json:"blob_storage_type,omitempty"`
+			DiagLogsUrl     *string `json:"diag_logs_url,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParsePostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse parses an HTTP response from a PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLWithResponse call
 func ParsePostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse(rsp *http.Response) (*PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -994,6 +1430,36 @@ func ParsePostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRespon
 			BlobStorageType *string `json:"blob_storage_type,omitempty"`
 			LogsUrl         *string `json:"logs_url,omitempty"`
 			SoftSizeLimit   *string `json:"soft_size_limit,omitempty"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse parses an HTTP response from a PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLWithResponse call
+func ParsePostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse(rsp *http.Response) (*PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			BlobStorageType *string `json:"blob_storage_type,omitempty"`
+			SoftSizeLimit   *string `json:"soft_size_limit,omitempty"`
+			SummaryUrl      *string `json:"summary_url,omitempty"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err

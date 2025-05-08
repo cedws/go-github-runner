@@ -154,6 +154,86 @@ paths:
                   type: string
                 line_count:
                   type: number
+  /twirp/results.services.receiver.Receiver/GetStepSummarySignedBlobURL:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary_url:
+                    type: string
+                  soft_size_limit:
+                    type: string
+                  blob_storage_type:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow_job_run_backend_id:
+                  type: string
+                workflow_run_backend_id:
+                  type: string
+                step_backend_id:
+                  type: string
+  /twirp/results.services.receiver.Receiver/CreateStepSummaryMetadata:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                step_backend_id:
+                  type: string
+                workflow_run_backend_id:
+                  type: string
+                workflow_job_run_backend_id:
+                  type: string
+                size:
+                  type: string
+                uploaded_at:
+                  type: string
+  /twirp/results.services.receiver.Receiver/GetJobDiagLogsSignedBlobURL:
+    post:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  diag_logs_url:
+                    type: string
+                  blob_storage_type:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workflow_job_run_backend_id:
+                  type: string
+                workflow_run_backend_id:
+                  type: string
   /_ws/ingest.sock:
     get:
       responses:
