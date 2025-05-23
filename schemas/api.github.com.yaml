@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: GitHub Actions API
 servers:
-  - url: https://api.github.com/actions
+  - url: https://api.github.com
 paths:
-  /runner-registration:
+  /actions/runner-registration:
     post:
       responses:
         "200":
