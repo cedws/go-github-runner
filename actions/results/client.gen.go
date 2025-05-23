@@ -12,6 +12,9 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/labstack/echo/v4"
+	strictecho "github.com/oapi-codegen/runtime/strictmiddleware/echo"
 )
 
 // PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateJSONBody defines parameters for PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate.
@@ -1469,4 +1472,632 @@ func ParsePostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRes
 	}
 
 	return response, nil
+}
+
+// ServerInterface represents all server handlers.
+type ServerInterface interface {
+
+	// (GET /_ws/ingest.sock)
+	GetWsIngestSock(ctx echo.Context) error
+
+	// (POST /twirp/github.actions.results.api.v1.WorkflowStepUpdateService/WorkflowStepsUpdate)
+	PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/CreateJobLogsMetadata)
+	PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/CreateStepLogsMetadata)
+	PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/CreateStepSummaryMetadata)
+	PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/GetJobDiagLogsSignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/GetJobLogsSignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/GetStepLogsSignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx echo.Context) error
+
+	// (POST /twirp/results.services.receiver.Receiver/GetStepSummarySignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx echo.Context) error
+}
+
+// ServerInterfaceWrapper converts echo contexts to parameters.
+type ServerInterfaceWrapper struct {
+	Handler ServerInterface
+}
+
+// GetWsIngestSock converts echo context to params.
+func (w *ServerInterfaceWrapper) GetWsIngestSock(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.GetWsIngestSock(ctx)
+	return err
+}
+
+// PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx)
+	return err
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL converts echo context to params.
+func (w *ServerInterfaceWrapper) PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx)
+	return err
+}
+
+// This is a simple interface which specifies echo.Route addition functions which
+// are present on both echo.Echo and echo.Group, since we want to allow using
+// either of them for path registration
+type EchoRouter interface {
+	CONNECT(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	DELETE(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	GET(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	HEAD(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	OPTIONS(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	PATCH(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	POST(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	PUT(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	TRACE(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+}
+
+// RegisterHandlers adds each server route to the EchoRouter.
+func RegisterHandlers(router EchoRouter, si ServerInterface) {
+	RegisterHandlersWithBaseURL(router, si, "")
+}
+
+// Registers handlers, and prepends BaseURL to the paths, so that the paths
+// can be served under a prefix.
+func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL string) {
+
+	wrapper := ServerInterfaceWrapper{
+		Handler: si,
+	}
+
+	router.GET(baseURL+"/_ws/ingest.sock", wrapper.GetWsIngestSock)
+	router.POST(baseURL+"/twirp/github.actions.results.api.v1.WorkflowStepUpdateService/WorkflowStepsUpdate", wrapper.PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/CreateJobLogsMetadata", wrapper.PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/CreateStepLogsMetadata", wrapper.PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/CreateStepSummaryMetadata", wrapper.PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/GetJobDiagLogsSignedBlobURL", wrapper.PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/GetJobLogsSignedBlobURL", wrapper.PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/GetStepLogsSignedBlobURL", wrapper.PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL)
+	router.POST(baseURL+"/twirp/results.services.receiver.Receiver/GetStepSummarySignedBlobURL", wrapper.PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL)
+
+}
+
+type GetWsIngestSockRequestObject struct {
+}
+
+type GetWsIngestSockResponseObject interface {
+	VisitGetWsIngestSockResponse(w http.ResponseWriter) error
+}
+
+type GetWsIngestSock200Response struct {
+}
+
+func (response GetWsIngestSock200Response) VisitGetWsIngestSockResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateRequestObject struct {
+	Body *PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateJSONRequestBody
+}
+
+type PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateResponseObject interface {
+	VisitPostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate200JSONResponse struct {
+	Ok *bool `json:"ok,omitempty"`
+}
+
+func (response PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate200JSONResponse) VisitPostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata200JSONResponse struct {
+	Ok *bool `json:"ok,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata200JSONResponse struct {
+	Ok *bool `json:"ok,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata200JSONResponse struct {
+	Ok *bool `json:"ok,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL200JSONResponse struct {
+	BlobStorageType *string `json:"blob_storage_type,omitempty"`
+	DiagLogsUrl     *string `json:"diag_logs_url,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL200JSONResponse struct {
+	BlobStorageType *string `json:"blob_storage_type,omitempty"`
+	LogsUrl         *string `json:"logs_url,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL200JSONResponse struct {
+	BlobStorageType *string `json:"blob_storage_type,omitempty"`
+	LogsUrl         *string `json:"logs_url,omitempty"`
+	SoftSizeLimit   *string `json:"soft_size_limit,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestObject struct {
+	Body *PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponseObject interface {
+	VisitPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse(w http.ResponseWriter) error
+}
+
+type PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL200JSONResponse struct {
+	BlobStorageType *string `json:"blob_storage_type,omitempty"`
+	SoftSizeLimit   *string `json:"soft_size_limit,omitempty"`
+	SummaryUrl      *string `json:"summary_url,omitempty"`
+}
+
+func (response PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL200JSONResponse) VisitPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+// StrictServerInterface represents all server handlers.
+type StrictServerInterface interface {
+
+	// (GET /_ws/ingest.sock)
+	GetWsIngestSock(ctx context.Context, request GetWsIngestSockRequestObject) (GetWsIngestSockResponseObject, error)
+
+	// (POST /twirp/github.actions.results.api.v1.WorkflowStepUpdateService/WorkflowStepsUpdate)
+	PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate(ctx context.Context, request PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateRequestObject) (PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/CreateJobLogsMetadata)
+	PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataRequestObject) (PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/CreateStepLogsMetadata)
+	PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataRequestObject) (PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/CreateStepSummaryMetadata)
+	PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestObject) (PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/GetJobDiagLogsSignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestObject) (PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/GetJobLogsSignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequestObject) (PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/GetStepLogsSignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRequestObject) (PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponseObject, error)
+
+	// (POST /twirp/results.services.receiver.Receiver/GetStepSummarySignedBlobURL)
+	PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx context.Context, request PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestObject) (PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponseObject, error)
+}
+
+type StrictHandlerFunc = strictecho.StrictEchoHandlerFunc
+type StrictMiddlewareFunc = strictecho.StrictEchoMiddlewareFunc
+
+func NewStrictHandler(ssi StrictServerInterface, middlewares []StrictMiddlewareFunc) ServerInterface {
+	return &strictHandler{ssi: ssi, middlewares: middlewares}
+}
+
+type strictHandler struct {
+	ssi         StrictServerInterface
+	middlewares []StrictMiddlewareFunc
+}
+
+// GetWsIngestSock operation middleware
+func (sh *strictHandler) GetWsIngestSock(ctx echo.Context) error {
+	var request GetWsIngestSockRequestObject
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.GetWsIngestSock(ctx.Request().Context(), request.(GetWsIngestSockRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "GetWsIngestSock")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(GetWsIngestSockResponseObject); ok {
+		return validResponse.VisitGetWsIngestSockResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate operation middleware
+func (sh *strictHandler) PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate(ctx echo.Context) error {
+	var request PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateRequestObject
+
+	var body PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate(ctx.Request().Context(), request.(PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdate")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateResponseObject); ok {
+		return validResponse.VisitPostTwirpGithubActionsResultsApiV1WorkflowStepUpdateServiceWorkflowStepsUpdateResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadata")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverCreateJobLogsMetadataResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadata")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverCreateStepLogsMetadataResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadata")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverCreateStepSummaryMetadataResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURL")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverGetJobDiagLogsSignedBlobURLResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURL")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverGetJobLogsSignedBlobURLResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURL")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverGetStepLogsSignedBlobURLResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL operation middleware
+func (sh *strictHandler) PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx echo.Context) error {
+	var request PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestObject
+
+	var body PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL(ctx.Request().Context(), request.(PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURL")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponseObject); ok {
+		return validResponse.VisitPostTwirpResultsServicesReceiverReceiverGetStepSummarySignedBlobURLResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
 }

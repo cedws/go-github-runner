@@ -13,7 +13,9 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/labstack/echo/v4"
 	"github.com/oapi-codegen/runtime"
+	strictecho "github.com/oapi-codegen/runtime/strictmiddleware/echo"
 )
 
 // PostIdAcquirejobJSONBody defines parameters for PostIdAcquirejob.
@@ -815,4 +817,379 @@ func ParsePostIdRenewjobResponse(rsp *http.Response) (*PostIdRenewjobResponse, e
 	}
 
 	return response, nil
+}
+
+// ServerInterface represents all server handlers.
+type ServerInterface interface {
+
+	// (POST /{id}/acquirejob)
+	PostIdAcquirejob(ctx echo.Context, id string) error
+
+	// (POST /{id}/completejob)
+	PostIdCompletejob(ctx echo.Context, id string) error
+
+	// (POST /{id}/renewjob)
+	PostIdRenewjob(ctx echo.Context, id string) error
+}
+
+// ServerInterfaceWrapper converts echo contexts to parameters.
+type ServerInterfaceWrapper struct {
+	Handler ServerInterface
+}
+
+// PostIdAcquirejob converts echo context to params.
+func (w *ServerInterfaceWrapper) PostIdAcquirejob(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostIdAcquirejob(ctx, id)
+	return err
+}
+
+// PostIdCompletejob converts echo context to params.
+func (w *ServerInterfaceWrapper) PostIdCompletejob(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostIdCompletejob(ctx, id)
+	return err
+}
+
+// PostIdRenewjob converts echo context to params.
+func (w *ServerInterfaceWrapper) PostIdRenewjob(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", ctx.Param("id"), &id, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostIdRenewjob(ctx, id)
+	return err
+}
+
+// This is a simple interface which specifies echo.Route addition functions which
+// are present on both echo.Echo and echo.Group, since we want to allow using
+// either of them for path registration
+type EchoRouter interface {
+	CONNECT(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	DELETE(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	GET(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	HEAD(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	OPTIONS(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	PATCH(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	POST(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	PUT(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+	TRACE(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route
+}
+
+// RegisterHandlers adds each server route to the EchoRouter.
+func RegisterHandlers(router EchoRouter, si ServerInterface) {
+	RegisterHandlersWithBaseURL(router, si, "")
+}
+
+// Registers handlers, and prepends BaseURL to the paths, so that the paths
+// can be served under a prefix.
+func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL string) {
+
+	wrapper := ServerInterfaceWrapper{
+		Handler: si,
+	}
+
+	router.POST(baseURL+"/:id/acquirejob", wrapper.PostIdAcquirejob)
+	router.POST(baseURL+"/:id/completejob", wrapper.PostIdCompletejob)
+	router.POST(baseURL+"/:id/renewjob", wrapper.PostIdRenewjob)
+
+}
+
+type PostIdAcquirejobRequestObject struct {
+	Id   string `json:"id"`
+	Body *PostIdAcquirejobJSONRequestBody
+}
+
+type PostIdAcquirejobResponseObject interface {
+	VisitPostIdAcquirejobResponse(w http.ResponseWriter) error
+}
+
+type PostIdAcquirejob200JSONResponse struct {
+	BillingOwnerId *string `json:"billingOwnerId,omitempty"`
+	ContextData    *struct {
+		Github *struct {
+			D *[]struct {
+				K *string `json:"k,omitempty"`
+				V *string `json:"v,omitempty"`
+			} `json:"d,omitempty"`
+			T *float32 `json:"t,omitempty"`
+		} `json:"github,omitempty"`
+		Inputs *struct {
+			D *[]interface{} `json:"d,omitempty"`
+			T *float32       `json:"t,omitempty"`
+		} `json:"inputs,omitempty"`
+		Matrix *map[string]interface{} `json:"matrix"`
+		Needs  *struct {
+			D *[]interface{} `json:"d,omitempty"`
+			T *float32       `json:"t,omitempty"`
+		} `json:"needs,omitempty"`
+		Strategy *struct {
+			D *[]struct {
+				K *string `json:"k,omitempty"`
+				V *bool   `json:"v,omitempty"`
+			} `json:"d,omitempty"`
+			T *float32 `json:"t,omitempty"`
+		} `json:"strategy,omitempty"`
+		Vars *struct {
+			D *[]interface{} `json:"d,omitempty"`
+			T *float32       `json:"t,omitempty"`
+		} `json:"vars,omitempty"`
+	} `json:"contextData,omitempty"`
+	Defaults             *[]interface{}          `json:"defaults,omitempty"`
+	EnvironmentVariables *[]interface{}          `json:"environmentVariables,omitempty"`
+	FileTable            *[]string               `json:"fileTable,omitempty"`
+	JobContainer         *map[string]interface{} `json:"jobContainer"`
+	JobDisplayName       *string                 `json:"jobDisplayName,omitempty"`
+	JobId                *string                 `json:"jobId,omitempty"`
+	JobName              *string                 `json:"jobName,omitempty"`
+	JobOutputs           *map[string]interface{} `json:"jobOutputs"`
+	JobServiceContainers *map[string]interface{} `json:"jobServiceContainers"`
+	LockedUntil          *string                 `json:"lockedUntil,omitempty"`
+	Mask                 *[]struct {
+		Type  *string `json:"type,omitempty"`
+		Value *string `json:"value,omitempty"`
+	} `json:"mask,omitempty"`
+	MessageType *string `json:"messageType,omitempty"`
+	Plan        *struct {
+		ArtifactLocation *string  `json:"artifactLocation,omitempty"`
+		ArtifactUri      *string  `json:"artifactUri,omitempty"`
+		PlanId           *string  `json:"planId,omitempty"`
+		PlanType         *string  `json:"planType,omitempty"`
+		Version          *float32 `json:"version,omitempty"`
+	} `json:"plan,omitempty"`
+	RequestId *float32 `json:"requestId,omitempty"`
+	Resources *struct {
+		Endpoints *[]struct {
+			Authorization *struct {
+				Parameters *struct {
+					AccessToken *string `json:"AccessToken,omitempty"`
+				} `json:"parameters,omitempty"`
+				Scheme *string `json:"scheme,omitempty"`
+			} `json:"authorization,omitempty"`
+			Data *struct {
+				CacheServerUrl      *string `json:"CacheServerUrl,omitempty"`
+				FeedStreamUrl       *string `json:"FeedStreamUrl,omitempty"`
+				GenerateIdTokenUrl  *string `json:"GenerateIdTokenUrl,omitempty"`
+				PipelinesServiceUrl *string `json:"PipelinesServiceUrl,omitempty"`
+				ResultsServiceUrl   *string `json:"ResultsServiceUrl,omitempty"`
+				ServerId            *string `json:"ServerId,omitempty"`
+				ServerName          *string `json:"ServerName,omitempty"`
+			} `json:"data,omitempty"`
+			IsReady  *bool   `json:"isReady,omitempty"`
+			IsShared *bool   `json:"isShared,omitempty"`
+			Name     *string `json:"name,omitempty"`
+			Url      *string `json:"url,omitempty"`
+		} `json:"endpoints,omitempty"`
+	} `json:"resources,omitempty"`
+	Snapshot *map[string]interface{} `json:"snapshot"`
+	Steps    *[]struct {
+		Condition       *string                 `json:"condition,omitempty"`
+		ContextName     *string                 `json:"contextName,omitempty"`
+		ContinueOnError *map[string]interface{} `json:"continueOnError"`
+		Id              *string                 `json:"id,omitempty"`
+		Name            *string                 `json:"name,omitempty"`
+		Reference       *struct {
+			Name           *string `json:"name,omitempty"`
+			Ref            *string `json:"ref,omitempty"`
+			RepositoryType *string `json:"repositoryType,omitempty"`
+			Type           *string `json:"type,omitempty"`
+		} `json:"reference,omitempty"`
+		TimeoutInMinutes *map[string]interface{} `json:"timeoutInMinutes"`
+		Type             *string                 `json:"type,omitempty"`
+	} `json:"steps,omitempty"`
+	Timeline *struct {
+		ChangeId *float32                `json:"changeId,omitempty"`
+		Id       *string                 `json:"id,omitempty"`
+		Location *map[string]interface{} `json:"location"`
+	} `json:"timeline,omitempty"`
+	Variables *map[string]struct {
+		IsSecret *bool   `json:"isSecret,omitempty"`
+		Value    *string `json:"value,omitempty"`
+	} `json:"variables,omitempty"`
+}
+
+func (response PostIdAcquirejob200JSONResponse) VisitPostIdAcquirejobResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+type PostIdCompletejobRequestObject struct {
+	Id   string `json:"id"`
+	Body *PostIdCompletejobJSONRequestBody
+}
+
+type PostIdCompletejobResponseObject interface {
+	VisitPostIdCompletejobResponse(w http.ResponseWriter) error
+}
+
+type PostIdCompletejob200Response struct {
+}
+
+func (response PostIdCompletejob200Response) VisitPostIdCompletejobResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
+}
+
+type PostIdRenewjobRequestObject struct {
+	Id   string `json:"id"`
+	Body *PostIdRenewjobJSONRequestBody
+}
+
+type PostIdRenewjobResponseObject interface {
+	VisitPostIdRenewjobResponse(w http.ResponseWriter) error
+}
+
+type PostIdRenewjob200JSONResponse struct {
+	LockedUntil *string `json:"lockedUntil,omitempty"`
+}
+
+func (response PostIdRenewjob200JSONResponse) VisitPostIdRenewjobResponse(w http.ResponseWriter) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+
+	return json.NewEncoder(w).Encode(response)
+}
+
+// StrictServerInterface represents all server handlers.
+type StrictServerInterface interface {
+
+	// (POST /{id}/acquirejob)
+	PostIdAcquirejob(ctx context.Context, request PostIdAcquirejobRequestObject) (PostIdAcquirejobResponseObject, error)
+
+	// (POST /{id}/completejob)
+	PostIdCompletejob(ctx context.Context, request PostIdCompletejobRequestObject) (PostIdCompletejobResponseObject, error)
+
+	// (POST /{id}/renewjob)
+	PostIdRenewjob(ctx context.Context, request PostIdRenewjobRequestObject) (PostIdRenewjobResponseObject, error)
+}
+
+type StrictHandlerFunc = strictecho.StrictEchoHandlerFunc
+type StrictMiddlewareFunc = strictecho.StrictEchoMiddlewareFunc
+
+func NewStrictHandler(ssi StrictServerInterface, middlewares []StrictMiddlewareFunc) ServerInterface {
+	return &strictHandler{ssi: ssi, middlewares: middlewares}
+}
+
+type strictHandler struct {
+	ssi         StrictServerInterface
+	middlewares []StrictMiddlewareFunc
+}
+
+// PostIdAcquirejob operation middleware
+func (sh *strictHandler) PostIdAcquirejob(ctx echo.Context, id string) error {
+	var request PostIdAcquirejobRequestObject
+
+	request.Id = id
+
+	var body PostIdAcquirejobJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostIdAcquirejob(ctx.Request().Context(), request.(PostIdAcquirejobRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostIdAcquirejob")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostIdAcquirejobResponseObject); ok {
+		return validResponse.VisitPostIdAcquirejobResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostIdCompletejob operation middleware
+func (sh *strictHandler) PostIdCompletejob(ctx echo.Context, id string) error {
+	var request PostIdCompletejobRequestObject
+
+	request.Id = id
+
+	var body PostIdCompletejobJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostIdCompletejob(ctx.Request().Context(), request.(PostIdCompletejobRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostIdCompletejob")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostIdCompletejobResponseObject); ok {
+		return validResponse.VisitPostIdCompletejobResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
+// PostIdRenewjob operation middleware
+func (sh *strictHandler) PostIdRenewjob(ctx echo.Context, id string) error {
+	var request PostIdRenewjobRequestObject
+
+	request.Id = id
+
+	var body PostIdRenewjobJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.PostIdRenewjob(ctx.Request().Context(), request.(PostIdRenewjobRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "PostIdRenewjob")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(PostIdRenewjobResponseObject); ok {
+		return validResponse.VisitPostIdRenewjobResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
 }
